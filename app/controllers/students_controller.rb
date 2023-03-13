@@ -32,15 +32,15 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
     private
 
     def student_params
-        params.permit(:name, :major, :age)
+        params.permit( :name, :major, :age, :instructor_id )
     end
 
     def not_found
-        render json: {"error": "Instructor not found"}
+        render json: {"error": "Instructor not found"}, status: 404
     end
 
     def invalid
-        render json: {"errors": ["validation errors"]}
+        render json: {"errors": ["validation errors"]}, status: 422
     end
     
 end

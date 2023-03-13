@@ -4,7 +4,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
     def index
         instructors = Instructor.all
-        render json: instructors, include: :students, status: :ok
+        render json: instructors, status: :ok
     end
 
     def show
@@ -36,10 +36,10 @@ rescue_from ActiveRecord::RecordNotFound, with: :not_found
     end
 
     def not_found
-        render json: {"error": "Instructor not found"}
+        render json: {"error": "Instructor not found"}, status: 404
     end
 
     def invalid
-        render json: {"errors": ["validation errors"]}
+        render json: {"errors": ["validation errors"]}, status: 422
     end
 end
